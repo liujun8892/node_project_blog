@@ -1,0 +1,5 @@
+{
+  "mongoDB": {
+    "pwd": "APP_PASSWORD"
+  }
+}

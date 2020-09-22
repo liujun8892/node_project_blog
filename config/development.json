@@ -1,0 +1,9 @@
+{
+  "title": "文件管理系统--开发环境",
+  "mongoDB": {
+    "user": "lj",
+    "host": "localhost",
+    "port": "27017",
+    "name": "blog"
+  }
+}

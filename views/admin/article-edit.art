@@ -1,0 +1,86 @@
+{{extend './common/layout.art'}}
+
+{{block 'main'}}
+{{include './common/header.art'}}
+<!-- 头部内容 -->
+<!-- 主体内容 -->
+<div class="content">
+    <!-- 侧边栏内容 -->
+    {{include './common/aside.art'}}
+    <!-- 侧边栏内容 -->
+    <div class="main">
+        <!-- 分类标题 -->
+        <div class="title">
+            <h4>5b9a716cb2d2bf17706bcc0a</h4>
+        </div>
+        <!-- /分类标题 -->
+        <form action="/admin/article-add" class="form-container" enctype="multipart/form-data" method="post">
+            <div class="form-group">
+                <label>标题</label>
+                <input class="form-control" name="title" placeholder="请输入文章标题" type="text">
+            </div>
+            <div class="form-group">
+                <label>作者</label>
+                <input class="form-control" name="author" readonly type="text" value="{{@userInfo._id}}">
+            </div>
+            <div class="form-group">
+                <label>发布时间</label>
+                <input class="form-control" name="publishDate" type="date">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputFile">文章封面</label>
+                <input id="file" multiple name="cover" type="file">
+                <div class="thumbnail-waper">
+                    <img class="img-thumbnail" id="preview" src="">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>内容</label>
+                <textarea class="form-control" id="editor" name="content"></textarea>
+            </div>
+            <div class="buttons">
+                <input class="btn btn-primary" type="submit">
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- /主体内容 -->
+{{/block}}
+
+{{block 'script'}}
+<script src="/admin/lib/ckeditor5/ckeditor.js"></script>
+<script type="text/javascript">
+
+    let editor;
+
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // 获取数据
+    // const editorData = editor.getData();
+
+    //1.实现上传图片预览
+    $(function () {
+        $('#file').on('change', function () {
+            //创建reader对象
+            var reader = new FileReader();
+            //以二进制流的方法读取第一张图片
+            reader.readAsDataURL(this.files[0]);
+            //读完之后,吧结果给图片src实现预览
+            reader.onload = function () {
+                $('#preview')[0].src = reader.result;
+            }
+        })
+    })
+</script>
+{{/block}}
+    
+ 
